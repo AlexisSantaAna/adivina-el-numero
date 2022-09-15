@@ -22,11 +22,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.text,
     paddingVertical: 20,
+    fontFamily: "Lato-Regular"
   },
   label: {
-    fontSize: 14,
+    fontSize: 16,
     color: colors.text,
     paddingVertical: 5,
+    fontFamily: "Lato-Regular"
   },
   inputContainer: {
     width: 320,
@@ -42,6 +44,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingVertical: 10,
     textAlign: "center",
+    fontFamily: "Lato-Bold",
+    color: colors.primary
   },
   buttonContainer: {
     marginHorizontal: 20,
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onStartGame }) => {
   const [number, setNumber] = useState();
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState("");
@@ -71,10 +75,10 @@ const StartGameScreen = () => {
   const onHandleConfirmInput = () => {
     const chosenNumber = parseInt(number);
 
-    if (chosenNumber == NaN || chosenNumber <= 0 || chosenNumber > 99) return;
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) return;
 
     setConfirmed(true);
-    setSelectedNumber(parseInt(number));
+    setSelectedNumber(chosenNumber);
     setNumber("");
   };
 
@@ -110,7 +114,7 @@ const StartGameScreen = () => {
             />
           </View>
         </Card>
-        {confirmed ? <NumberContainer selectedNumber={selectedNumber} /> : null}
+        {confirmed ? <NumberContainer selectedNumber={selectedNumber} onStartGame={onStartGame}/> : null}
       </View>
     </TouchableWithoutFeedback>
   );
