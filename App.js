@@ -30,7 +30,7 @@ export default function App({ selectedNumber }) {
     "Lato-Black": require("./assets/fonts/Lato-Black.ttf"),
   });
 
-  const title = !userNumber ? "Adivina el número" : "Comienza el juego";
+  let title = !userNumber ? "Adivina el número" : "Comienza el juego";
 
   //esta función la pasamos a la pantalla inicial del juego y nos devuelve el nro confirmado, luego se cambia de screen en la app
   const onStartGame = (selectedNumber) => {
@@ -66,6 +66,7 @@ export default function App({ selectedNumber }) {
     ;
   } else if (rounds > 0) {
     content = <GameOver roundsNumber={rounds} userNumber={userNumber} onRestart={onRestartGame}/>
+    title = "Juego finalizado"
   }
   
   return (
